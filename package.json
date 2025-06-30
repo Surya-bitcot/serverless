@@ -1,0 +1,33 @@
+{
+  "name": "crud-api-supabase",
+  "version": "1.0.0",
+  "description": "CRUD API using Supabase, Express, Serverless, and AWS Lambda",
+  "main": "src/handler.js",
+  "scripts": {
+    "start": "sls offline start"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.839.0",
+    "@aws-sdk/s3-request-presigner": "^3.839.0",
+    "@supabase/supabase-js": "^2.42.0",
+    "aws-cli": "^0.0.2",
+    "aws-sdk": "^2.1692.0",
+    "express": "^4.18.2",
+    "knex": "^3.1.0",
+    "lambda-multipart-parser": "^1.0.1",
+    "multer": "^2.0.1",
+    "multer-s3": "^3.0.1",
+    "objection": "^3.1.5",
+    "pg": "^8.16.3",
+    "serverless-dotenv-plugin": "^6.0.0",
+    "serverless-http": "^3.2.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "serverless": "^3.38.0",
+    "serverless-offline": "^12.0.4"
+  },
+  "type": "module"
+}

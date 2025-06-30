@@ -1,0 +1,87 @@
+service: crud-api-supabase
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - s3:ListBucket
+            - s3:GetObject
+            - s3:PutObject
+            - s3:DeleteObject
+          Resource:
+            - arn:aws:s3:::serverless-profile.dev-1
+            - arn:aws:s3:::serverless-profile.dev-1/*
+  environment:
+    PG_CONNECTION_STRING: postgresql://postgres.dlampzjjcldqesyzvuhy:Surya@321@aws-0-ap-south-1.pooler.supabase.com:5432/postgres
+    
+    
+
+functions:
+  getUser:
+    handler: src/userHandlers.getUser
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: get
+  getAllUsers:
+    handler: src/userHandlers.getAllUsers
+    events:
+      - httpApi:
+          path: /users
+          method: get
+  createUser:
+    handler: src/userHandlers.createUser
+    events:
+      - httpApi:
+          path: /user
+          method: post
+  updateUser:
+    handler: src/userHandlers.updateUser
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: put
+  deleteUser:
+    handler: src/userHandlers.deleteUser
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: delete
+  checkDbConnection:
+    handler: src/userHandlers.checkDbConnection
+    events:
+      - httpApi:
+          path: /check-db
+          method: get
+  uploadUserProfile:
+    handler: src/userHandlers.uploadUserProfile
+    events:
+      - httpApi:
+          path: /user/{id}/profile
+          method: post
+  getUserProfileFile:
+    handler: src/userHandlers.getUserProfileFile
+    events:
+      - httpApi:
+          path: /user/{id}/profile
+          method: get
+  deleteUserProfileFile:
+    handler: src/userHandlers.deleteUserProfileFile
+    events:
+      - httpApi:
+          path: /user/{id}/profile
+          method: delete
+
+plugins:
+  - serverless-offline
+
+package:
+  individually: true
+
